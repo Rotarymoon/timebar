@@ -11,28 +11,30 @@ public class TimeBarScript : MonoBehaviour
 
     void Start()
     {
-        timeLeft = 15;
-        timeCountOn = true;
-        StartCoroutine(Countdown());
+        timeLeft = 15; //how many seconds would you like to countdown
+        timeCountOn = true; //countdown can start
+        StartCoroutine(Countdown()); //start the countdown
     }
 
     void Update()
     {
-        timeBar.GetComponent<RectTransform>().DOScaleX(timeLeft, 1f).SetEase(Ease.Linear);
+        timeBar.GetComponent<RectTransform>().DOScaleX(timeLeft, 1f).SetEase(Ease.Linear); //time bar smoothly run out
     }
 
-    IEnumerator Countdown()
+    IEnumerator Countdown() //reducing time 
     {
-        while (timeCountOn)
+        while (timeCountOn) //if countdown can start
         {
-            timeLeft--;
-            yield return new WaitForSeconds(1f);
-            if (timeLeft <= 0)
+            timeLeft--; //decrease by one second
+            yield return new WaitForSeconds(1f); //wait for an actual one second
+            if (timeLeft <= 0) //if time runs out
             {
                 timeLeft = 0;
                 Debug.Log("FINISHED");
-                timeCountOn = false;
-                timeBar.SetActive(false);
+                timeCountOn = false; 
+                timeBar.SetActive(false); //just to make sure time bar is invisible
+                //do something
+                //for more info, watch the video in readme file
             }
         }
     }
